@@ -1,18 +1,21 @@
 import { Button } from "@/components/retroui/Button";
 import { Input } from "@/components/retroui/Input";
 import { Label } from "@/components/retroui/Label";
+import { Text } from "@/components/retroui/Text";
+import { Link } from '@tanstack/react-router'
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { API_BASE_URI } from "../../../config";
 import axios from "axios";
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [userData, setUserData] = useState({
-        firstName: "parasuraman",
-        lastName: "a",
-        email: "parasuraman@gmail.com",
-        password: "welcome",
-        confirmPassword: "welcome"
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
     })
     const handleOnchage = (e) => {
         const { name, value } = e.target;
@@ -27,7 +30,7 @@ const Register = () => {
             password: userData.password,
             role: "admin"
         }).then((res) => {
-            localStorage.setItem("token",res.token)
+            localStorage.setItem("token", res.token)
         }).catch((error) => {
             console.error(error);
         })
@@ -97,7 +100,7 @@ const Register = () => {
                             <div className="relative">
                                 <Input
                                     id="confirmPassword"
-                                    type={showPassword ? "text" : "password"}
+                                    type={showConfirmPassword ? "text" : "password"}
                                     name="confirmPassword"
                                     value={userData.confirmPassword}
                                     placeholder="••••••••"
@@ -106,10 +109,10 @@ const Register = () => {
                                 />
                                 <button
                                     type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-black p-1"
                                 >
-                                    {showPassword ? (
+                                    {showConfirmPassword ? (
                                         <Eye className="w-5 h-5" strokeWidth={1.5} />
                                     ) : (
                                         <EyeOff className="w-5 h-5" strokeWidth={1.5} />
@@ -130,6 +133,14 @@ const Register = () => {
                     </ul> */}
 
                         <Button className="w-full text-center">CREATE ACCOUNT</Button>
+
+                        <div className="flex justify-end mt-4">
+                            <Button asChild variant="link" className="text-right">
+                                <Link to="/login">Login Here</Link>
+                            </Button>
+                        </div>
+
+
                     </form>
                 </div>
 

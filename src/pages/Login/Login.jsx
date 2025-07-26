@@ -1,6 +1,7 @@
 import { Button } from "@/components/retroui/Button";
 import { Input } from "@/components/retroui/Input";
 import { Label } from "@/components/retroui/Label";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { API_BASE_URI } from "../../../config";
@@ -8,8 +9,8 @@ import axios from "axios";
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [userData, setUserData] = useState({
-        email: "parasuraman@gmail.com",
-        password: "welcome",
+        email: "",
+        password: "",
     })
     const handleOnchage = (e) => {
         const { name, value } = e.target;
@@ -92,6 +93,11 @@ const Login = () => {
                     </ul> */}
 
                         <Button className="w-full text-center">LOGIN ACCOUNT</Button>
+                        <div className="flex justify-end mt-4">
+                            <Button asChild variant="link" className="text-right">
+                                <Link to="/register">Register Here</Link>
+                            </Button>
+                        </div>
                     </form>
                 </div>
 
